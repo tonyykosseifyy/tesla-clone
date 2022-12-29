@@ -1,39 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import LanguageIcon from '@mui/icons-material/Language';
-import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { Wrapper,Content } from "./login.style";
 import Footer from "../Footer";
 import { Link,useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 
-const Login = () =>{
+import { signInWithPopup } from "firebase/auth"
+import { provider, auth } from "../firebase";
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
+const Login = () =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const signIn = (e) =>{
-        e.preventDefault() //Doesn't reload page after click on button
-
-        signInWithEmailAndPassword(auth,email,password).then((userAuth)=>{
+    
+    const signIn = () => {
+        
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
             dispatch(
                 login({
-                    email: userAuth.user.email,
-                    uid: userAuth.user.uid,
-                    displayName: userAuth.user.displayName,
+                    email: user?.email,
+                    uid: user?.uid,
+                    displayName: user?.displayName,
                 })
             )
             navigate('/teslaaccount')
-        })
-        .catch((error) => {
-            alert(error.code + error.message)
-            document.getElementById("password").value = "";
-        })
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorCode + errorMessage)
+        });
     }
+    
+    
 
     document.title = 'Tesla SSO - Sign In'
     return(
@@ -52,23 +54,7 @@ const Login = () =>{
 
             <Content>
                 <h1>Sign In</h1>
-                <form>
-                    <label htmlFor="email" >Email Address</label>
-                    <input type='email' id="email" value={email} onChange={(e)=> setEmail(e.target.value) }/>
-                    <label htmlFor="password">Password</label>
-                    <input type='password' id="password" value={password} onChange={(e)=> setPassword(e.target.value) }/>
-
-                    <button type="submit" onClick={signIn}>Sign In</button>
-                </form>
-                <div className="line" >
-                    <hr/><span>OR</span><hr/>
-                </div>
-
-                <div>
-                <Link to='/signup'>
-                    <button>Create Account</button>
-                </Link>
-                </div>
+                <button onClick={(e) => signIn()}>Sign in With Google</button>
             </Content>
         </Wrapper>
         <Footer/>
