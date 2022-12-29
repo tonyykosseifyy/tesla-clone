@@ -11,7 +11,6 @@ import Model3 from './components/Model-3';
 import ModelX from './components/Model-X';
 import ModelY from './components/Model_Y';
 import Login from './components/Login';
-import Signup from './components/Signup';
 import Account from './components/Account';
 
 import { useSelector,useDispatch } from 'react-redux';
@@ -27,7 +26,6 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
-        // User is signed in
         dispatch(
           login({
             email: userAuth.email,
@@ -36,7 +34,6 @@ function App() {
           })
         )
       } else {
-        // User is signed out
         dispatch(logout())
       }
     })

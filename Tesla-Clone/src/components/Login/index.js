@@ -2,7 +2,6 @@ import React from "react";
 import LanguageIcon from '@mui/icons-material/Language';
 
 import { Wrapper,Content } from "./login.style";
-import Footer from "../Footer";
 import { Link,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
@@ -57,7 +56,6 @@ const Login = () =>{
                 <button onClick={(e) => signIn()}>Sign in With Google</button>
             </Content>
         </Wrapper>
-        <Footer/>
         </>
     )
 }

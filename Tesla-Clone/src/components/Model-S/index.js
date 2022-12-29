@@ -6,7 +6,6 @@ import Section from "../Section";
 import Interior from "../Interior_Specs";
 import Specs from "../Gen_Spec";
 import Header from "../Header";
-import Footer from "../Footer";
 
 const ModelS = () =>{
 
@@ -32,7 +31,6 @@ const ModelS = () =>{
             <Content>
                 <Specs/>
             </Content>
-            <Footer bottom='bottom'/>
         </Wrapper>
     )
 }

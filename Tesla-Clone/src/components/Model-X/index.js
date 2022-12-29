@@ -6,7 +6,6 @@ import Section from "../Section";
 import Interior from "../Interior_Specs";
 import Specs from "../Gen_Spec";
 import Header from "../Header";
-import Footer from "../Footer";
 
 const ModelX = () =>{
     document.title = "Model X | Tesla";
@@ -25,7 +24,6 @@ const ModelX = () =>{
             />
             <Interior/>
             <Specs/>
-            <Footer bottom='bottom'/>
         </Wrapper>
     )
 }

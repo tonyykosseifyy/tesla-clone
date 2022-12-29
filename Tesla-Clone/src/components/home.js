@@ -3,7 +3,7 @@ import { Wrapper,Content } from './home.style'
 
 import Section from './Section'
 import Header from './Header';
-import Footer from './Footer';
+
 
 function Home() {
 
@@ -32,7 +32,6 @@ function Home() {
             </Content>
             <Content>
                 <Section title="Accessories" leftbtn="SHOP NOW" backgroundImg="accessories.jpg"/>
-                <Footer/>
             </Content>
         </Wrapper>
         </>
